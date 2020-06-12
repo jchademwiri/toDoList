@@ -13,9 +13,9 @@ export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter();
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   //set Dynamic Classes
   setClasses() {

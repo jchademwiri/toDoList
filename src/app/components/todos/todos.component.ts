@@ -11,7 +11,7 @@ import { from, Observable } from 'rxjs';
 export class TodosComponent implements OnInit {
   todos: Todo[];
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
     this.todoService.getTodos().subscribe(todos => {
@@ -20,8 +20,15 @@ export class TodosComponent implements OnInit {
   }
 
   deleteTodo(todo: Todo) {
-    //console.log('delete me');
+    //Remove from UI
     this.todos = this.todos.filter(t => t.id !== todo.id);
+    // Remove from Server
     this.todoService.deleteTodo(todo).subscribe();
+  }
+
+  addTodo(todo: Todo) {
+    this.todoService.addTodo(todo).subscribe(todo => {
+      this.todos.push(todo)
+    })
   }
 }

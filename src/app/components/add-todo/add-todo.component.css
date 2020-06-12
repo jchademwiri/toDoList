@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  padding: 1rem;
+}
+.form input[type="text"] {
+  flex: 10;
+  padding: 5px;
+}
+.form input[type="submit"] {
+  flex: 2;
+}

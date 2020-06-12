@@ -17,41 +17,27 @@ export class TodoService {
   todosUrl: string = 'https://jsonplaceholder.typicode.com/todos';
   todosLimit = '?_limit=5';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
+  // Get todos
   getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(`${this.todosUrl}${this.todosLimit}`);
-    // return [
-    //   {
-    //     id: 1,
-    //     title: 'Todo One',
-    //     completed: false
-    //   },
-    //   {
-    //     id: 2,
-    //     title: 'Todo Two',
-    //     completed: true
-    //   },
-    //   {
-    //     id: 3,
-    //     title: 'Todo Three',
-    //     completed: false
-    //   },
-    //   {
-    //     id: 4,
-    //     title: 'Todo Four',
-    //     completed: true
-    //   }
-    // ];
+
   }
-  //Delete Todo
+  //  Delete Todo
   deleteTodo(todo: Todo): Observable<Todo> {
-    //time 1:07:10
+    const url = `${this.todosUrl}/${todo.id}`;
+    return this.http.delete<Todo>(url)
+  }
+
+  // Add Todo
+  addTodo(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(this.todosUrl, todo)
   }
 
   // Toggle completed
   toggleCompleted(todo: Todo): Observable<any> {
     const url = `${this.todosUrl}/${todo.id}`;
-    return this.http.put(url, todo, httpOptions);
+    return this.http.put(url, todo);
   }
 }
